@@ -1,0 +1,31 @@
+{
+  "name": "@fastify-workspace/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "prisma:generate": "prisma generate --schema prisma/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema prisma/schema.prisma",
+    "prisma:deploy": "prisma migrate deploy --schema prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@fastify-workspace/application": "0.1.0",
+    "@fastify-workspace/config": "0.1.0",
+    "@fastify-workspace/contracts": "0.1.0",
+    "@fastify-workspace/infrastructure": "0.1.0",
+    "@fastify/swagger": "^9.7.0",
+    "@fastify/swagger-ui": "^6.0.0",
+    "@grpc/grpc-js": "^1.14.4",
+    "@grpc/proto-loader": "^0.8.1",
+    "@prisma/client": "6.19.3",
+    "fastify": "^5.8.5"
+  },
+  "devDependencies": {
+    "prisma": "6.19.3"
+  }
+}

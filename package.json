@@ -1,0 +1,75 @@
+{
+  "name": "apun-hi-bhagwan-hai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Production-ready Fastify TypeScript monorepo with REST, gRPC, Prisma, Swagger docs, deployment templates, and strict Git quality gates.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biswajitNanda223/apun-hi-bhagwan-hai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/biswajitNanda223/apun-hi-bhagwan-hai/issues"
+  },
+  "homepage": "https://github.com/biswajitNanda223/apun-hi-bhagwan-hai#readme",
+  "packageManager": "npm@11.17.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w packages/domain && npm run build -w packages/config && npm run build -w packages/contracts && npm run build -w packages/application && npm run build -w packages/infrastructure && npm run build -w apps/api",
+    "build:packages": "npm run build -w packages/domain && npm run build -w packages/config && npm run build -w packages/contracts && npm run build -w packages/application && npm run build -w packages/infrastructure",
+    "dev": "npm run build:packages && npm run dev -w apps/api",
+    "start": "npm run start -w apps/api",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "prepare": "husky",
+    "commit:status": "git status --short",
+    "commit:check": "npm run scan",
+    "commit:lint": "commitlint --edit",
+    "commit:lint:sample": "commitlint --from HEAD~1 --to HEAD --verbose",
+    "commit:ready": "npm run commit:status && npm run commit:check",
+    "pre-commit": "lint-staged && npm run typecheck",
+    "precommit": "npm run pre-commit",
+    "scan": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "scan:quick": "npm run lint && npm run typecheck && npm run test",
+    "scan:security": "npm audit --audit-level=moderate",
+    "deps:check": "npm run deps:audit && npm run deps:outdated",
+    "deps:outdated": "node scripts/deps-outdated.mjs",
+    "deps:audit": "npm audit --audit-level=moderate",
+    "deps:fix": "npm audit fix"
+  },
+  "overrides": {
+    "@prisma/client": "6.19.3",
+    "prisma": "6.19.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs,json,md,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx,js,mjs,cjs}": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.61.1",
+    "@typescript-eslint/parser": "^8.61.1",
+    "eslint": "^10.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.4",
+    "prisma": "6.19.3",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1",
+    "vitest": "^4.1.9"
+  }
+}

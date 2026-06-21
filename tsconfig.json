@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@fastify-workspace/application": ["./packages/application/src/index.ts"],
+      "@fastify-workspace/config": ["./packages/config/src/index.ts"],
+      "@fastify-workspace/contracts": ["./packages/contracts/src/index.ts"],
+      "@fastify-workspace/domain": ["./packages/domain/src/index.ts"],
+      "@fastify-workspace/infrastructure": ["./packages/infrastructure/src/index.ts"]
+    }
+  },
+  "include": ["apps/**/*.ts", "packages/**/*.ts"],
+  "exclude": ["**/dist/**", "**/node_modules/**", "**/coverage/**"]
+}
